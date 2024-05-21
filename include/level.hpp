@@ -1,4 +1,3 @@
-#pragma once
 #ifndef JIJA_LEVEL_HPP
 #define JIJA_LEVEL_HPP
 
@@ -9,7 +8,7 @@
 // #include "DSL.hpp"
 // #include "entity.hpp"
 #include "event.hpp"
-
+#include "object_man.hpp"
 // #include "player.hpp"
 #include "vec2.hpp"
 // #include "movingblock.hpp"
@@ -34,9 +33,6 @@ class Level {
 
     ~Level();
 
-    void save(const std::string& filename) const;
-    void load(const std::string& filename);
-
     const Camera& getCam() const;
     Camera& getCam();
 
@@ -60,6 +56,9 @@ class Level {
 
     EventManager& getEventManager();
 
+    void save(const std::string& filename) const;
+    void load(const std::string& filename, const ObjectManager& obj_man, SpriteManager& sprite_man);
+
     private:
     Background bg;
     Camera cam;
@@ -70,8 +69,6 @@ class Level {
     std::vector<Drawable*> drawable;
     std::vector<Block*> blocks;
     // std::vector<Entity*> entities;
-
-    std::vector<std::string> texture_name_table;
     
     std::string lvl_name;
 

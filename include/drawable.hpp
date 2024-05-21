@@ -38,6 +38,7 @@ class Drawable : public ObjBase {
 
     SpriteInfo  getSpriteInfo() const { return spriteInfo; }
     void setFrame(Vec2 frame_pos) { spriteInfo.frame = frame_pos; }
+    void setTextureID(uint64_t id) { spriteInfo.textureID = id; }
 
     private:
     Vec2 pos;

@@ -5,9 +5,9 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "objbase.hpp"
+#include "drawable.hpp"
 
-typedef ObjBase* (*create_obj_func_t)();
+typedef Drawable* (*create_obj_func_t)();
 
 typedef ObjInfo (*getObjInfo_t)();
 
@@ -25,6 +25,10 @@ class ObjectManager {
     void addObject(const ObjInfo info);
 
     void loadPlugin(const std::string& filename);
+
+    bool contains(const std::string& name) const;
+
+    ObjInfo getInfo(const std::string& name) const;
 
     private:
     std::unordered_map<std::string, ObjInfo> obj_info;

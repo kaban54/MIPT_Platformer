@@ -15,8 +15,16 @@ void ObjectManager::loadPlugin(const std::string& filename) {
         std::cerr << "Cannot load plugin " << filename << "\n" << dlerror() << "\n";
         return;
     }
-    getObjInfo_t get_obj_info = (getObjInfo_t) dlsym (lib, "getObjInfo");
+    getObjInfo_t get_obj_info = (getObjInfo_t) dlsym(lib, "getObjInfo");
     if (get_obj_info) {
         addObject(get_obj_info());
     }
+}
+
+bool ObjectManager::contains(const std::string& name) const {
+    return obj_info.contains(name);
+}
+
+ObjInfo ObjectManager::getInfo(const std::string& name) const {
+    return obj_info.at(name);
 }

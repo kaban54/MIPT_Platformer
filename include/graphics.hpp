@@ -22,6 +22,8 @@ class SpriteManager {
 
     sf::Sprite getSprite(const Rect& rect, const SpriteInfo& sprite_info);
 
+    size_t getSize() const;
+
     private:
     std::unordered_map<uint64_t, sf::Texture> textures;
     unsigned int screen_w;

@@ -45,6 +45,10 @@ sf::Sprite SpriteManager::getSprite(const Rect& rect, const SpriteInfo& info) {
     ret.setScale(size.x / info.spriteSize.x, size.y / info.spriteSize.y);
 }
 
+size_t SpriteManager::getSize() const {
+    return textures.size();
+}
+
 
 GraphicsModule::GraphicsModule(unsigned int w, unsigned int h, SpriteManager& sprite_man_):
     screen(),
