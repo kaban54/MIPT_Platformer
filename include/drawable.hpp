@@ -41,9 +41,9 @@ class Drawable : public ObjBase {
     void setTextureID(uint64_t id) { spriteInfo.textureID = id; }
 
     private:
+    SpriteInfo spriteInfo;
     Vec2 pos;
     Vec2 size;
-    SpriteInfo spriteInfo;
 };
 
 #endif

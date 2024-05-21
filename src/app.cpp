@@ -16,6 +16,21 @@ void App::onClock(double dt) {
     graphics.sfDisplay(sfwindow);
 }
 
+void App::loadPlugins(const std::string& filename) {
+    std::fstream file;
+    file.open(filename);
+    if (!file.is_open()) return;
+
+    std::string plugin_name;
+    std::string full_name;
+    
+    while (std::getline(file, plugin_name)) {
+        full_name.assign("plugins/");
+        full_name += plugin_name;
+        obj_man.loadPlugin(full_name);
+    }
+}
+
 void App::loadLevel(const std::string& filename) {
-    lvl.load(filename);
+    lvl.load(filename, obj_man, sprite_man);
 }

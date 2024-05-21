@@ -1,4 +1,4 @@
-#include "vec2.hpp"
+#include "../include/vec2.hpp"
 
 Vec2::Vec2():
     x (0),

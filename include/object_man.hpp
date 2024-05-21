@@ -9,20 +9,29 @@
 
 typedef Drawable* (*create_obj_func_t)();
 
-typedef ObjInfo (*getObjInfo_t)();
-
 struct ObjInfo {
     std::string name;
     std::string texture_file_name;
     create_obj_func_t create_obj_f;
+
+    explicit ObjInfo() = default;
+
+    explicit ObjInfo(const std::string name_,
+                     const std::string texture_file_name_,
+                     create_obj_func_t create_obj_f_):
+        name (name_),
+        texture_file_name (texture_file_name_),
+        create_obj_f (create_obj_f_) {}
 };
+
+typedef ObjInfo (*getObjInfo_t)();
 
 class ObjectManager {
     public:
 
     explicit ObjectManager() = default;
 
-    void addObject(const ObjInfo info);
+    void addObject(ObjInfo info);
 
     void loadPlugin(const std::string& filename);
 

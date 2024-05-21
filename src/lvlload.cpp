@@ -65,11 +65,11 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
     cam = readCam(inStream);
     MSG("CAMERA: PASSED, SUKA")
 
-    inStream >> curString;
-    if ("Player:" != curString) {
-        MESSAGE("Syntax ERROR at (%s)", filename.c_str());
-        abort();
-    }
+    // inStream >> curString;
+    // if ("Player:" != curString) {
+    //     MESSAGE("Syntax ERROR at (%s)", filename.c_str());
+    //     abort();
+    // }
     // Player* newPlayer = parsePlayer(event_man, texture_name_table, inStream);
     // entities.push_back(newPlayer);
     // drawable.push_back(newPlayer);
@@ -82,7 +82,7 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
         abort();
     }
     parskip(inStream);
-    if (inStream.peek() != '{') {
+    if (inStream.get() != '{') {
         MESSAGE("Syntax ERROR at (%s)", filename.c_str());
         abort();
     }
@@ -91,7 +91,7 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
     while (inStream.peek() != '}') {
         std::string obj_name;
         inStream >> obj_name;
-        if (!obj_man.contains(curString)) {
+        if (!obj_man.contains(obj_name)) {
             MESSAGE("Unknown object (\"%s\")", obj_name.c_str());
             abort();
         }
@@ -104,6 +104,7 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
         uint64_t id = sprite_man.getSize();
         obj -> setTextureID(id);
         sprite_man.loadTexture(id, obj_info.texture_file_name);
+        drawable.push_back(obj);
     }
     MESSAGE("LEVEL(%s) LOADED SUCESSFULLY!", filename.c_str());
 }

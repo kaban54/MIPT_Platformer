@@ -1,11 +1,12 @@
 #include "../include/object_man.hpp"
 
 
-void ObjectManager::addObject(const ObjInfo info) {
+void ObjectManager::addObject(ObjInfo info) {
     if (obj_info.contains(info.name)) {
         std::cerr << "object \"" << info.name << "\" already exists.\n";
         return;
     }
+    std::cerr << "adding (" << info.name << ")\n";
     obj_info[info.name] = info;
 }
 

@@ -5,13 +5,10 @@
 #include <vector> // myvector)
 #include "blocks.hpp"
 #include "camera.hpp"
-// #include "DSL.hpp"
-// #include "entity.hpp"
 #include "event.hpp"
 #include "object_man.hpp"
-// #include "player.hpp"
+#include "sprite_man.hpp"
 #include "vec2.hpp"
-// #include "movingblock.hpp"
 
 
 struct Background {

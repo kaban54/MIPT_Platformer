@@ -19,6 +19,7 @@ int main() {
     uint64_t last_time = 0;
 
     App app(W, H, event_man, sfwindow);
+    app.loadPlugins("plugins/plugin_list");
     app.loadLevel("./levels/test_level.txt");
 
     while (sfwindow.isOpen()) {

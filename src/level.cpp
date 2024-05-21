@@ -7,7 +7,6 @@ Level::Level(EventManager& event_man_):
     bounds(),
     drawable(),
     blocks(),
-    texture_name_table(),
     lvl_name(),
     event_man(event_man_)
     {
@@ -60,14 +59,6 @@ std::vector<Block*>& Level::getBlocks() {
 
 // const std::vector<Entity*>& getEntities() const { return entities; }
 // std::vector<Entity*>& getEntities() { return entities; }
-
-const std::vector<std::string>& Level::getTextures() const {
-    return texture_name_table;
-}
-
-std::vector<std::string>& Level::getTextures() {
-    return texture_name_table;
-}
 
 EventManager& Level::getEventManager() {
     return event_man;
