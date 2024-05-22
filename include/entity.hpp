@@ -2,11 +2,12 @@
 #define JIJA_ENTITY_HPP
 
 #include "drawable.hpp"
-
+#include "load.hpp"
 
 struct EntityProperties {
     bool walking;
     bool flying;
+    bool dead;
 
     explicit EntityProperties() = default;
 };
@@ -21,7 +22,9 @@ class Entity : public Drawable {
         mass(mass_),
         velocity(velocity_),
         health(health_),
-        prop(properties_) {}
+        prop(properties_) {
+            prop.dead = false;
+        }
 
 
     virtual ObjType getType() const override final {return ENTITY;}
@@ -39,7 +42,7 @@ class Entity : public Drawable {
     EntityProperties  properties() const { return prop; }
     EntityProperties& properties()       { return prop; }
 
-    virtual void die() = 0;
+    virtual void die() { prop.dead = true; }
 
     private:
     double mass;
@@ -101,11 +104,27 @@ class Flying : public Entity {
     public:
 
     explicit Flying(SpriteInfo sp_info, Vec2 pos_, Vec2 size_, Vec2 velocity_,
-                     double mass_, int health_, double walking_vel_, double jumping_vel_):
+                     double mass_, int health_):
         Entity(sp_info, pos_, size_, velocity_, mass_, health_) {
             properties().walking = false;
             properties().flying = true;
         }
+    
+    virtual void load(std::ifstream &stream) override {
+        CHECK_DELIM('{')
+        setPos(readVec(stream));
+        CHECK_DELIM(',')
+        setSize(readVec(stream));
+        CHECK_DELIM(',')
+        setVelocity(readVec(stream));
+        CHECK_DELIM(',')
+        setMass(readNum(stream));
+        CHECK_DELIM(',')
+        setHealth(readNum(stream));
+        CHECK_DELIM('}')
+    }
+    
+    virtual void save(std::ofstream &stream) const override {};
 };
 
 

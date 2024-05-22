@@ -1,4 +1,5 @@
 #include "../include/level.hpp"
+#include "../include/plugin.hpp"
 
 Level::Level(EventManager& event_man_):
     bg(),
@@ -78,4 +79,7 @@ void Level::addObj(Drawable* obj) {
     drawable.push_back(obj);
     if      (obj -> getType() == BLOCK )   blocks.push_back(dynamic_cast<Block* >(obj));
     else if (obj -> getType() == ENTITY) entities.push_back(dynamic_cast<Entity*>(obj));
+
+    Plugin* plug = dynamic_cast<Plugin*>(obj);
+    if (plug) plug -> setLvl(this);
 }

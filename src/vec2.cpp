@@ -35,6 +35,17 @@ void Vec2::Rotate (const double angle) {
     x = new_x;
 }
 
+double Vec2::GetAngle() {
+    Vec2 norm = !(*this);
+    if (norm.x == 0) {
+        if (norm.y > 0) return M_PI_2;
+        else return 3. * M_PI_2;
+    }
+
+    if (norm.y >= 0) return std::acos(norm.x);
+    else return (M_PI * 2 - std::acos(norm.x));
+}
+
 Vec2 operator+= (Vec2& vec1, const Vec2& vec2) {
     vec1.x += vec2.x;
     vec1.y += vec2.y;

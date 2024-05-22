@@ -9,6 +9,7 @@
 #include "event.hpp"
 #include "object_man.hpp"
 #include "player.hpp"
+#include "plugin.hpp"
 #include "sprite_man.hpp"
 #include "vec2.hpp"
 
@@ -25,14 +26,14 @@ struct Background {
     {}
 };
 
-class Level {
+class Level : public LevelAPI {
     public:
 
     explicit Level(EventManager& event_man_);
 
     ~Level();
 
-    Player& getPlayer();
+    virtual Player& getPlayer() override;
 
     const Camera& getCam() const;
     Camera& getCam();
@@ -52,7 +53,7 @@ class Level {
     const std::vector<Entity*>& getEntities() const;
     std::vector<Entity*>& getEntities();
 
-    EventManager& getEventManager();
+    virtual EventManager& getEventManager() override;
 
     void addObj(Drawable* obj);
 

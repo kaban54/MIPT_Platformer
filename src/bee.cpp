@@ -1,0 +1,45 @@
+#include "../include/load.hpp"
+#include "../include/object_man.hpp"
+#include "../include/entity.hpp"
+#include "../include/plugin.hpp"
+
+#include <iostream>
+
+const double BASE_VEL = 200;
+const double ROT_VEL = 2;
+
+class Bee : public Flying, public Plugin {
+    public:
+    explicit Bee():
+        Flying(SpriteInfo(0, Vec2(3, 1), Vec2(18, 13)), Vec2(0, 0), Vec2(0, 0), Vec2(0, 0), 0, 0)
+        {}
+    
+    virtual void init() override {
+        Vec2 vel(BASE_VEL, 0); 
+        vel.Rotate(GetRandAngle());
+        setVelocity(vel);
+
+        lvl_api -> getEventManager().CreateClockHandler(*this, &Bee::onClock);
+    }
+
+    void onClock(double dt) {
+        Vec2 player_pos = lvl_api -> getPlayer().getPos();
+        Vec2 dir = player_pos - getPos();
+        Vec2 newvel = getVelocity();
+
+        double angle_dif = dir.GetAngle() - getVelocity().GetAngle();
+        if ((angle_dif > 0 && angle_dif < M_PI) || angle_dif < -M_PI) {
+            newvel.Rotate(ROT_VEL * dt);
+        }
+        else newvel.Rotate(-ROT_VEL * dt);
+        setVelocity(newvel);
+    }
+};
+
+Drawable* createObj() {
+    return new Bee;
+}
+
+extern "C" ObjInfo getObjInfo() {
+    return ObjInfo("Bee", "textures/Bee.png", createObj);
+}

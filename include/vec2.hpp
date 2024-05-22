@@ -21,6 +21,8 @@ struct Vec2 {
     Vec2 operator!() const;
 
     void Rotate (const double angle);
+
+    double GetAngle();
 };
 
 Vec2 operator+= (Vec2& vec1, const Vec2& vec2);

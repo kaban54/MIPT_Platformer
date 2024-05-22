@@ -16,6 +16,9 @@ test: obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.
 ground1: obj/ground1.o obj/load.o obj/vec2.o obj/geometry.o
 	gcc -shared -o plugins/ground1.so obj/load.o obj/vec2.o obj/geometry.o obj/ground1.o $(LDFLAGS)
 
+bee: obj/bee.o obj/load.o obj/vec2.o obj/geometry.o
+	gcc -shared -o plugins/bee.so obj/load.o obj/vec2.o obj/geometry.o obj/bee.o $(LDFLAGS)
+
 $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
