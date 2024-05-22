@@ -2,6 +2,7 @@
 #define JIJA_BLOCKS_HPP
 
 #include "drawable.hpp"
+#include "load.hpp"
 
 
 struct BlockProperties {
@@ -22,6 +23,8 @@ class Block : public Drawable {
         Drawable(info, pos_, size_),
         prop(properties_) {}
 
+    virtual ObjType getType() const override final {return BLOCK;}
+
     BlockProperties  properties() const { return prop; }
     BlockProperties& properties()       { return prop; }
     
@@ -37,6 +40,16 @@ class FixedBlock : public Block {
             properties().fixed = true;
             properties().solid = true;
         }
+    
+    virtual void load(std::ifstream &stream) override {
+        CHECK_DELIM('{')
+        setPos(readVec(stream));
+        CHECK_DELIM(',')
+        setSize(readVec(stream));
+        CHECK_DELIM('}')
+    }
+    
+    virtual void save(std::ofstream &stream) const override {};
 };
 
 
