@@ -32,6 +32,8 @@ class Level {
 
     ~Level();
 
+    Player& getPlayer();
+
     const Camera& getCam() const;
     Camera& getCam();
 
@@ -52,10 +54,13 @@ class Level {
 
     EventManager& getEventManager();
 
+    void addObj(Drawable* obj);
+
     void save(const std::string& filename) const;
     void load(const std::string& filename, const ObjectManager& obj_man, SpriteManager& sprite_man);
 
     private:
+    Player* player;
     Background bg;
     Camera cam;
     Vec2 grav_acc;

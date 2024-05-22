@@ -16,6 +16,10 @@ Level::~Level() {
     for (auto elem : drawable) delete elem;
 }
 
+Player& Level::getPlayer() {
+    return *player;
+}
+
 const Camera& Level::getCam() const {
     return cam;
 }
@@ -66,4 +70,12 @@ std::vector<Entity*>& Level::getEntities() {
 
 EventManager& Level::getEventManager() {
     return event_man;
+}
+
+void Level::addObj(Drawable* obj) {
+    if (obj == nullptr) return;
+
+    drawable.push_back(obj);
+    if      (obj -> getType() == BLOCK )   blocks.push_back(dynamic_cast<Block* >(obj));
+    else if (obj -> getType() == ENTITY) entities.push_back(dynamic_cast<Entity*>(obj));
 }
