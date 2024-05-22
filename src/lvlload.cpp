@@ -126,7 +126,7 @@ Player* parsePlayer(std::ifstream &stream, EventManager& ev_man, SpriteManager& 
 
     uint64_t id = sprite_man.getSize();
     sprite_man.loadTexture(id, "textures/player.png");
-    SpriteInfo spInfo(id, Vec2(0, 0), Vec2(13, 19));
+    SpriteInfo spInfo(id, Vec2(0, 0), Vec2(14, 19));
     return new Player(ev_man, spInfo, pos, size, velocity, mass, 100);
 }
 

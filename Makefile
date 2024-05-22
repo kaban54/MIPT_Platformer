@@ -5,7 +5,7 @@ SFMLFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
 OBJDIR = obj/
 SRCDIR = src/
 
-all: test
+all: test ground1 bee plat cp
 
 test: obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.o obj/load.o \
 	  obj/lvlload.o obj/object_man.o obj/physics.o obj/player.o obj/sprite_man.o obj/vec2.o
