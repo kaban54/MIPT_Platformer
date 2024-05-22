@@ -16,6 +16,6 @@ Drawable* createObj() {
     return new Ground1;
 }
 
-extern "C" ObjInfo getObjInfo() {
+ExportFunc ObjInfo getObjInfo() {
     return ObjInfo("Ground1", "textures/ground1.png", createObj);
 }

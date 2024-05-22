@@ -2,7 +2,7 @@
 #define JIJA_DRAWABLE_HPP
 
 #include "objbase.hpp"
-
+#include <cstdint>
 
 struct SpriteInfo {
     uint64_t textureID;

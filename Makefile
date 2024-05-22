@@ -37,10 +37,11 @@ $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
 wind:
-	g++ -IC:\SFML-2.5.1\include -LC:\SFML-2.5.1\lib                                            \
-./src/main.cpp ./src/player.cpp   ./src/vec2.cpp  ./src/collidable.cpp  ./src/physics.cpp  \
-./src/load.cpp ./src/geometry.cpp ./src/graphics.cpp                                       \
--lm -o test.exe -lmingw32 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-main -mwindows
+	g++ -std=c++20 -IC:\SFML-2.5.1\include -LC:\SFML-2.5.1\lib                                             						\
+./src/main.cpp ./src/app.cpp ./src/camera.cpp ./src/geometry.cpp ./src/graphics.cpp ./src/level.cpp ./src/load.cpp 	\
+./src/lvlload.cpp ./src/object_man.cpp ./src/physics.cpp ./src/player.cpp ./src/sprite_man.cpp ./src/vec2.cpp    	\
+./src/gui.cpp ./src/widget.cpp																						\
+-lm -D WIND -o test.exe -lmingw32 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-main -mwindows
 
 clean:
 	rm obj/*.o -f

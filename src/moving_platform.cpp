@@ -61,6 +61,6 @@ Drawable* createObj() {
     return new MovingPlatform;
 }
 
-extern "C" ObjInfo getObjInfo() {
+ExportFunc ObjInfo getObjInfo() {
     return ObjInfo("MovingPlatform", "textures/platforms.png", createObj);
 }

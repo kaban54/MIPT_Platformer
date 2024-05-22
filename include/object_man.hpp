@@ -1,10 +1,19 @@
 #ifndef JIJA_OBJMAN_HPP
 #define JIJA_OBJMAN_HPP
 
-#include <dlfcn.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
+
+#ifdef WIND
+#include <windows.h>
+
+#define ExportFunc  extern "C" __declspec( dllexport )
+#else
+#define ExportFunc  extern "C"
+#include <dlfcn.h>
+#endif
+
 #include "drawable.hpp"
 
 typedef Drawable* (*create_obj_func_t)();

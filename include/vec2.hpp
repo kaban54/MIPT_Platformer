@@ -1,6 +1,6 @@
 #ifndef VEC2_HPP
 #define VEC2_HPP
-
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include <cstdlib>
 

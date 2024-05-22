@@ -58,6 +58,6 @@ Drawable* createObj() {
     return new Bee;
 }
 
-extern "C" ObjInfo getObjInfo() {
+ExportFunc ObjInfo getObjInfo() {
     return ObjInfo("Bee", "textures/Bee.png", createObj);
 }

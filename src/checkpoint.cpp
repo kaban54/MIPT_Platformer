@@ -36,6 +36,6 @@ Drawable* createObj() {
     return new Checkpoint;
 }
 
-extern "C" ObjInfo getObjInfo() {
+ExportFunc ObjInfo getObjInfo() {
     return ObjInfo("Checkpoint", "textures/staticObjects.png", createObj);
 }

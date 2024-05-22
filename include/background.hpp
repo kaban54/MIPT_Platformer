@@ -1,6 +1,7 @@
 #ifndef JIJA_BG_HPP
 #define JIJA_BG_HPP
 
+#include <stdint.h>
 #include "geometry.hpp"
 
 struct Background {
