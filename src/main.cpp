@@ -21,7 +21,13 @@ int main() {
     App app(W, H, event_man, sfwindow);
     app.loadFont("fonts/Minecraft-Regular.ttf");
     AppController app_ctrl(app);
-    app.loadPlugins("plugins/plugin_list");
+    
+    #ifdef WIND
+    app.loadPlugins("plugins/plugin_list/windows");
+    #else
+    app.loadPlugins("plugins/plugin_list/linux");
+    #endif
+
     app.loadLevel("./levels/test_level.txt");
 
     while (sfwindow.isOpen()) {
