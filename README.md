@@ -6,3 +6,12 @@
 -----------------------------
 
 ## Руководство пользователя игры "JIJA"
+
+Для запуска игры нужно установить [SFML](https://www.sfml-dev.org/download.php).
+
+```
+make prepare
+make jija
+./jija
+```
+
