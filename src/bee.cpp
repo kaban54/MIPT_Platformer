@@ -23,6 +23,9 @@ class Bee : public Flying, public Plugin {
     }
 
     void onClock(double dt) {
+        if (Intersect(lvl_api -> getPlayer().getRect(), getRect())) {
+            lvl_api -> getPlayer().die();
+        }
         Vec2 player_pos = lvl_api -> getPlayer().getPos();
         Vec2 dir = player_pos - getPos();
         Vec2 newvel = getVelocity();
