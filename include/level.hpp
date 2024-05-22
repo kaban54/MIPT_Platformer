@@ -34,6 +34,10 @@ class Level : public LevelAPI {
     ~Level();
 
     virtual Player& getPlayer() override;
+    virtual EventManager& getEventManager() override;
+    virtual std::vector<Block*>& getBlocks() override;
+    virtual std::vector<Entity*>& getEntities() override;
+    virtual void addObj(Drawable* obj) override;
 
     const Camera& getCam() const;
     Camera& getCam();
@@ -48,14 +52,7 @@ class Level : public LevelAPI {
     std::vector<Drawable*>& getDrawable();
 
     const std::vector<Block*>& getBlocks() const;
-    std::vector<Block*>& getBlocks();
-
     const std::vector<Entity*>& getEntities() const;
-    std::vector<Entity*>& getEntities();
-
-    virtual EventManager& getEventManager() override;
-
-    void addObj(Drawable* obj);
 
     void save(const std::string& filename) const;
     void load(const std::string& filename, const ObjectManager& obj_man, SpriteManager& sprite_man);

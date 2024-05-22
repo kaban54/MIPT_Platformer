@@ -3,11 +3,16 @@
 
 #include "event.hpp"
 #include "player.hpp"
+#include "blocks.hpp"
+#include "entity.hpp"
 
 class LevelAPI {
     public:
     virtual Player& getPlayer() = 0;
     virtual EventManager& getEventManager() = 0;
+    virtual std::vector<Block*>& getBlocks() = 0;
+    virtual std::vector<Entity*>& getEntities() = 0;
+    virtual void addObj(Drawable* obj) = 0;
 };
 
 class Plugin {
