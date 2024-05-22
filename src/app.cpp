@@ -47,6 +47,7 @@ App::App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWin
         sprite_man.loadTexture(GUI_BG_TEXTURE_ID, "textures/background4.png");
         event_man.CreateClockHandler(*this, &App::onClock);
         lvl.getEventManager().disable();
+        pause_menu.getRoot().pushFrontSubWidget(new Button(Vec2(w / 2 - 300, 400), Vec2(600, 75)));
     }
 
 void App::onClock(double dt) {

@@ -5,6 +5,9 @@ Gui::Gui(EventManager& global_event_man, unsigned int w, unsigned int h):
     bg (GUI_BG_TEXTURE_ID, Vec2(w, h))
     {
         global_event_man.addSubManager(event_man);
+        event_man.CreateMousePressHandler  (root, &RootWid::mousePress  );
+        event_man.CreateMouseReleaseHandler(root, &RootWid::mouseRelease);
+        event_man.CreateMouseMoveHandler   (root, &RootWid::mouseMove   );
     }
 
 EventManager& Gui::getEventMan() {
