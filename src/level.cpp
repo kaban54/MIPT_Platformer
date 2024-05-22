@@ -6,7 +6,6 @@ Level::Level(EventManager& event_man_):
     grav_acc(Vec2(0, 900)),
     bounds(),
     drawable(),
-    blocks(),
     lvl_name(),
     event_man(event_man_)
     {
@@ -57,8 +56,13 @@ std::vector<Block*>& Level::getBlocks() {
     return blocks;
 }
 
-// const std::vector<Entity*>& getEntities() const { return entities; }
-// std::vector<Entity*>& getEntities() { return entities; }
+const std::vector<Entity*>& Level::getEntities() const {
+    return entities;
+}
+
+std::vector<Entity*>& Level::getEntities() {
+    return entities;
+}
 
 EventManager& Level::getEventManager() {
     return event_man;

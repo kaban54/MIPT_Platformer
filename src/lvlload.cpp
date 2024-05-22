@@ -10,7 +10,7 @@ const std::string SIGNATURE = "JIJALVL_VER4";
 Camera readCam(std::ifstream &stream);
 Background readBackground(std::ifstream &stream, SpriteManager& sprite_man);
 
-// static Player* parsePlayer(EventManager& ev_man, std::vector<std::string>& table, std::ifstream &stream);
+Player* parsePlayer(std::ifstream &stream, EventManager& ev_man, SpriteManager& sprite_man);
 
 void Level::load(const std::string& filename, const ObjectManager& obj_man, SpriteManager& sprite_man) {
     std::ifstream inStream(filename);
@@ -65,16 +65,16 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
     cam = readCam(inStream);
     MSG("CAMERA: PASSED, SUKA")
 
-    // inStream >> curString;
-    // if ("Player:" != curString) {
-    //     MESSAGE("Syntax ERROR at (%s)", filename.c_str());
-    //     abort();
-    // }
-    // Player* newPlayer = parsePlayer(event_man, texture_name_table, inStream);
-    // entities.push_back(newPlayer);
-    // drawable.push_back(newPlayer);
-    // cam.target = newPlayer;
-    // MSG("PLAYER: PASSED, SUKA")
+    inStream >> curString;
+    if ("Player:" != curString) {
+        MESSAGE("Syntax ERROR at (%s)", filename.c_str());
+        abort();
+    }
+    Player* newPlayer = parsePlayer(inStream, event_man, sprite_man);
+    entities.push_back(newPlayer);
+    drawable.push_back(newPlayer);
+    cam.target = newPlayer;
+    MSG("PLAYER: PASSED, SUKA")
 
     inStream >> curString;
     if (curString != "Objects:") {
@@ -109,29 +109,25 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
     MESSAGE("LEVEL(%s) LOADED SUCESSFULLY!", filename.c_str());
 }
 
+Player* parsePlayer(std::ifstream &stream, EventManager& ev_man, SpriteManager& sprite_man) {
+    CHECK_DELIM('{')
+        Vec2 pos = readVec(stream);
+        CHECK_DELIM(',')
 
+        Vec2 size = readVec(stream);
+        CHECK_DELIM(',')
 
-// static Player* parsePlayer(EventManager& ev_man, std::vector<std::string>& table, std::ifstream &stream) {
-//     CHECK_DELIM('{')
-//         Vec2 pos = readVec(stream);
-//         CHECK_DELIM(',')
+        Vec2 velocity = readVec(stream);
+        CHECK_DELIM(',')
 
-//         double side = readNum(stream);
-//         CHECK_DELIM(',')
+        double mass = readNum(stream);
+    CHECK_DELIM('}')
 
-//         Vec2 velocity = readVec(stream);
-//         CHECK_DELIM(',')
-
-//         double mass = readNum(stream);
-//         CHECK_DELIM(',')
-
-//         SpriteInfo spInfo = readSpriteInfo(table, stream);
-//     CHECK_DELIM('}')
-
-//     // MESSAGE("Player size = (%lg, %lg)", side, side);
-
-//     return new Player(ev_man, spInfo, pos, Vec2(side, side), velocity, mass, 100);
-// }
+    uint64_t id = sprite_man.getSize();
+    sprite_man.loadTexture(id, "textures/player.png");
+    SpriteInfo spInfo(id, Vec2(0, 0), Vec2(13, 19));
+    return new Player(ev_man, spInfo, pos, size, velocity, mass, 100);
+}
 
 Camera readCam(std::ifstream &stream) {
     CHECK_DELIM('{')

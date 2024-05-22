@@ -5,8 +5,10 @@
 #include <vector> // myvector)
 #include "blocks.hpp"
 #include "camera.hpp"
+#include "entity.hpp"
 #include "event.hpp"
 #include "object_man.hpp"
+#include "player.hpp"
 #include "sprite_man.hpp"
 #include "vec2.hpp"
 
@@ -45,11 +47,8 @@ class Level {
     const std::vector<Block*>& getBlocks() const;
     std::vector<Block*>& getBlocks();
 
-    // const std::vector<Entity*>& getEntities() const { return entities; }
-    // std::vector<Entity*>& getEntities() { return entities; }
-
-    const std::vector<std::string>& getTextures() const;
-    std::vector<std::string>& getTextures();
+    const std::vector<Entity*>& getEntities() const;
+    std::vector<Entity*>& getEntities();
 
     EventManager& getEventManager();
 
@@ -65,7 +64,7 @@ class Level {
 
     std::vector<Drawable*> drawable;
     std::vector<Block*> blocks;
-    // std::vector<Entity*> entities;
+    std::vector<Entity*> entities;
     
     std::string lvl_name;
 

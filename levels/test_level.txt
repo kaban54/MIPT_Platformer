@@ -5,6 +5,7 @@ Background: { ((0, 0), (1700, 900), "textures/background4.png")}
 Gravity: (0, 900)
 Bounds: ((-1000, 0), (10000, 2000))
 Camera: {(1600, 900), (650, 500), (300, 200)}
+Player: {(50, 470), (65, 95), (0, 0), 1}
 
 Objects: {
     TestObj {(100, 100), (300, 300)}

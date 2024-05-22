@@ -8,9 +8,9 @@ SRCDIR = src/
 all: test
 
 test: obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.o obj/load.o \
-	  obj/lvlload.o obj/object_man.o obj/sprite_man.o obj/vec2.o
+	  obj/lvlload.o obj/object_man.o obj/player.o obj/sprite_man.o obj/vec2.o
 	$(CC) -o test obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.o obj/load.o \
-	              obj/lvlload.o obj/object_man.o obj/sprite_man.o obj/vec2.o $(SFMLFLAGS) $(LDFLAGS)
+	              obj/lvlload.o obj/object_man.o obj/player.o obj/sprite_man.o obj/vec2.o $(SFMLFLAGS) $(LDFLAGS)
 
 testplug: src/testplug.cpp obj/load.o obj/vec2.o obj/geometry.o
 	g++ -c -o obj/testplug.o src/testplug.cpp $(CFLAGS)

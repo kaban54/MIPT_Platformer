@@ -8,6 +8,8 @@ class TestObj : public Drawable {
         Drawable(SpriteInfo(0, Vec2(0, 0), Vec2(32, 32)), Vec2(0, 0), Vec2(0, 0))
         {}
 
+    virtual ObjType getType() const override {return BLOCK;}
+
     virtual void load(std::ifstream &stream) override {
         CHECK_DELIM('{')
         setPos(readVec(stream));
@@ -16,7 +18,7 @@ class TestObj : public Drawable {
         CHECK_DELIM('}')
     }
 
-    virtual void save(std::ofstream &stream) override {};
+    virtual void save(std::ofstream &stream) const override {};
 };
 
 Drawable* createObj() {
