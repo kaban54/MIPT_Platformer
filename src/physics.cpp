@@ -30,6 +30,7 @@ void PhysicsModule::HandleWalking(Walking& ent, Level& lvl, double dt) {
     std::vector<Block*>&  blocks = lvl.getBlocks();
     for (auto block_it = blocks.begin(); block_it != blocks.end(); ++block_it) {
         Block& blk = **block_it;
+        if (!blk.properties().solid) continue;
         if (Intersect(ent, blk)) Collide(ent, blk);
     }
 
@@ -49,6 +50,7 @@ void PhysicsModule::HandleFlying(Flying& ent, Level& lvl, double dt) {
     std::vector<Block*>&  blocks = lvl.getBlocks();
     for (auto block_it = blocks.begin(); block_it != blocks.end(); ++block_it) {
         Block& blk = **block_it;
+        if (!blk.properties().solid) continue;
         if (Intersect(ent, blk)) Collide(ent, blk);
     }
 }

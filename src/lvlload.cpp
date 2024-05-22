@@ -72,7 +72,6 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
     }
     Player* newPlayer = parsePlayer(inStream, event_man, sprite_man);
     entities.push_back(newPlayer);
-    drawable.push_back(newPlayer);
     player = newPlayer;
     cam.target = newPlayer;
     MSG("PLAYER: PASSED, SUKA")
@@ -107,6 +106,7 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
         sprite_man.loadTexture(id, obj_info.texture_file_name);
         addObj(obj);
     }
+    drawable.push_back(newPlayer);
     MESSAGE("LEVEL(%s) LOADED SUCESSFULLY!", filename.c_str());
 }
 

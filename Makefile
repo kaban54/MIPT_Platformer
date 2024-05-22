@@ -22,6 +22,9 @@ bee: obj/bee.o obj/load.o obj/vec2.o obj/geometry.o
 plat: obj/platform.o obj/load.o obj/vec2.o obj/geometry.o
 	gcc -shared -o plugins/platform.so obj/load.o obj/vec2.o obj/geometry.o obj/platform.o $(LDFLAGS)
 
+cp: obj/checkpoint.o obj/load.o obj/vec2.o obj/geometry.o
+	gcc -shared -o plugins/checkpoint.so obj/load.o obj/vec2.o obj/geometry.o obj/checkpoint.o $(LDFLAGS)
+
 $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 

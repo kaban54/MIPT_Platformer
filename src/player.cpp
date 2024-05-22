@@ -1,6 +1,5 @@
 #include "../include/player.hpp"
 
-const double BASE_SPEED = 100;
 
 const Vec2  LEFT_FRAME = Vec2(-1, 0);
 const Vec2 STAND_FRAME = Vec2(0, 0);

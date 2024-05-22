@@ -5,17 +5,15 @@
 
 
 const double PLAYER_WALKING_VEL = 500;
-const double PLAYER_JUMPING_VEL = 500;
+const double PLAYER_JUMPING_VEL = 600;
 
 
-struct Checkpoint {
+struct CheckpointInfo {
     Vec2 spawn_point;
     Vec2 spawn_vel;
     int spawn_health;
 
-    Checkpoint(Checkpoint& cp_) = default;
-
-    explicit Checkpoint(Vec2 sp_, Vec2 sv_, int sh_):
+    explicit CheckpointInfo(Vec2 sp_, Vec2 sv_, int sh_):
     spawn_point(sp_),
     spawn_vel(sv_),
     spawn_health(sh_)
@@ -37,7 +35,7 @@ class Player : public Walking {
     void onKeyRelease(KeyboardContext keyContext);
 
     Vec2 getSpawnPoint() { return checkpoint.spawn_point; }
-    void setCheckpoint(Checkpoint& checkpoint_) { checkpoint = checkpoint_;}
+    void setCheckpoint(CheckpointInfo ch_info) { checkpoint = ch_info;}
 
     void respawn() {
         setPos(checkpoint.spawn_point);
@@ -51,5 +49,5 @@ class Player : public Walking {
     virtual void die() override { respawn(); }
 
   private:
-    Checkpoint checkpoint;
+    CheckpointInfo checkpoint;
 };
