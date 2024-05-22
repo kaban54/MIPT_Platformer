@@ -12,11 +12,15 @@ class GraphicsModule {
 
     explicit GraphicsModule(unsigned int w, unsigned int h, SpriteManager& sprite_man);
 
+    void setFont(const sf::Font& fnt_);
+
     void drawLevel(const Level& lvl);
 
     void drawGui(const Gui& gui);
 
     void drawWidget(const Widget& wid);
+
+    void drawText(const Text& text);
 
     void display();
 
@@ -26,6 +30,7 @@ class GraphicsModule {
 
     sf::RenderTexture screen;
     SpriteManager& sprite_man;
+    sf::Font fnt;
 };
 
 

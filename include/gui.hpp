@@ -4,7 +4,7 @@
 #include "background.hpp"
 #include "widget.hpp"
 
-const uint64_t GUI_BG_TEXTURE_ID = UINT64_MAX - 2;
+const uint64_t GUI_BG_TEXTURE_ID = UINT64_MAX - 3;
 
 class Gui {
     public:

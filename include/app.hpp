@@ -16,7 +16,6 @@ class App {
 
     explicit App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWindow& sfwindow_);
 
-
     void onClock(double dt);
     void handleLevel(double dt);
 
@@ -25,6 +24,8 @@ class App {
     void loadPlugins(const std::string& filename);
 
     void loadLevel(const std::string& filename);
+
+    void loadFont(const std::string& filename);
 
     private:
 

@@ -8,6 +8,7 @@
 
 const uint64_t NO_TEXTURE_ID = UINT64_MAX;
 const uint64_t BUTTON_TEXTURE_ID = UINT64_MAX - 1;
+const uint64_t TEXT_ID = UINT64_MAX - 2;
 
 class Widget : public Drawable {
     public:
@@ -82,6 +83,34 @@ class Button : public Widget {
 
     Event<> buttonPressed;
     Event<> buttonReleased;
+};
+
+class Text : public Widget {
+    public: 
+    explicit Text(Vec2 pos_, const std::string& txt_, uint8_t char_size_):
+        Widget(SpriteInfo(TEXT_ID, Vec2(), Vec2()), pos_, Vec2()),
+        txt (txt_),
+        char_size (char_size_) {}
+
+    void setTxt(const std::string& str) {
+        txt = str;
+    }
+
+    void setCharSize(uint8_t sz) {
+        char_size = sz;
+    }
+
+    const std::string& getTxt() const {
+        return txt;
+    }
+
+    uint8_t getCharSize() const {
+        return char_size;
+    }
+
+    private:
+    std::string txt;
+    uint8_t char_size;
 };
 
 #endif

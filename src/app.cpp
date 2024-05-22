@@ -12,6 +12,10 @@ AppController::AppController(App& app_):
         exit_btn -> addReleasingHandler(*this, &AppController::exit);
         app.pause_menu.getRoot().pushFrontSubWidget(exit_btn);
 
+        Text* play_txt = new Text(Vec2(app.size.x / 2 - 62, 400), "PLAY", 60);
+        unpause_btn -> pushFrontSubWidget(play_txt);
+        Text* exit_txt = new Text(Vec2(app.size.x / 2 - 62, 500), "EXIT", 60);
+        exit_btn -> pushFrontSubWidget(exit_txt);
     }
 
 void AppController::onLevelKey(KeyboardContext context) {
@@ -86,4 +90,10 @@ void App::loadPlugins(const std::string& filename) {
 
 void App::loadLevel(const std::string& filename) {
     lvl.load(filename, obj_man, sprite_man);
+}
+
+void App::loadFont(const std::string& filename) {
+    sf::Font fnt;
+    fnt.loadFromFile(filename);
+    graphics.setFont(fnt);
 }

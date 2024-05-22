@@ -9,6 +9,11 @@ GraphicsModule::GraphicsModule(unsigned int w, unsigned int h, SpriteManager& sp
 
 static SpriteInfo getBackGroundInfo(const Background& bg, const Camera& cam);
 
+
+void GraphicsModule::setFont(const sf::Font& fnt_) {
+    fnt = fnt_;
+}
+
 void GraphicsModule::drawLevel(const Level& lvl) {
     const Camera cam = lvl.getCam();
     screen.draw(sprite_man.getSprite(Rect(Vec2(0, 0), cam.size),
@@ -55,9 +60,18 @@ void GraphicsModule::drawGui(const Gui& gui) {
 void GraphicsModule::drawWidget(const Widget& wid) {
     if (!wid.getVisible()) return;
     if (wid.getSpriteInfo().textureID != NO_TEXTURE_ID) {
-        screen.draw(sprite_man.getSprite(wid.getRect(), wid.getSpriteInfo()));
+        if (wid.getSpriteInfo().textureID == TEXT_ID) drawText(*dynamic_cast<const Text*>(&wid));
+        else screen.draw(sprite_man.getSprite(wid.getRect(), wid.getSpriteInfo()));
     }
     for (auto subwid : wid.getList()) drawWidget(*subwid);
+}
+
+void GraphicsModule::drawText(const Text& text) {
+    sf::Text sftxt (text.getTxt(), fnt, text.getCharSize());
+    sftxt.setPosition (text.getPos().x, text.getPos().y);
+    sftxt.setFillColor (sf::Color::Black);
+    screen.draw (sftxt);
+    screen.display();
 }
 
 static SpriteInfo getBackGroundInfo(const Background& bg, const Camera& cam) {
