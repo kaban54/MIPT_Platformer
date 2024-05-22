@@ -9,23 +9,7 @@
 #include "physics.hpp"
 #include "gui.hpp"
 
-class PauseController {
-    public:
-
-    explicit PauseController(EventManager& lvl, EventManager& pause, bool& lvl_active);
-
-        void onLevelKey(KeyboardContext context);
-        void onPauseKey(KeyboardContext context);
-    
-        void   pause();
-        void unpause();
-
-    private:
-    bool& level_active;
-    EventManager& level_ev_man;
-    EventManager& pause_ev_man;
-
-};
+class AppController;
 
 class App {
     public:
@@ -44,10 +28,10 @@ class App {
 
     private:
 
+    Vec2 size;
     EventManager& event_man;
     Gui pause_menu;
     Level lvl;
-    PauseController pause_ctrl;
     ObjectManager obj_man;
     PhysicsModule physics;
     SpriteManager sprite_man;
@@ -55,6 +39,23 @@ class App {
     sf::RenderWindow& sfwindow;
     Gui& active_gui;
     bool level_active;
+
+    friend AppController;
+};
+
+class AppController {
+    public:
+
+    explicit AppController(App& app);
+
+        void onLevelKey(KeyboardContext context);
+    
+        void   pause();
+        void unpause();
+        void    exit();
+
+    private:
+    App& app;
 };
 
 #endif

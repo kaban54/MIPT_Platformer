@@ -19,6 +19,7 @@ int main() {
     uint64_t last_time = 0;
 
     App app(W, H, event_man, sfwindow);
+    AppController app_ctrl(app);
     app.loadPlugins("plugins/plugin_list");
     app.loadLevel("./levels/test_level.txt");
 
@@ -30,8 +31,6 @@ int main() {
                 sfwindow.close();
             
             if (event.type == sf::Event::KeyPressed) {
-                if (event.key.code == sf::Keyboard::Escape)
-                    sfwindow.close();
                 KeyboardContext kstate = {event.key.alt, event.key.control, event.key.shift, (Key)event.key.code};
                 event_man.keyPress(kstate);
             }

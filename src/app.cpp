@@ -1,42 +1,46 @@
 #include "../include/app.hpp"
 
-PauseController::PauseController(EventManager& lvl, EventManager& pause, bool& lvl_active):
-    level_active (lvl_active),
-    level_ev_man (lvl),
-    pause_ev_man (pause)
+AppController::AppController(App& app_):
+    app(app_)
     {
-        level_ev_man.CreateKeyPressHandler(*this, &PauseController::onLevelKey);
-        pause_ev_man.CreateKeyPressHandler(*this, &PauseController::onPauseKey);
+        app.lvl.getEventManager().CreateKeyPressHandler(*this, &AppController::onLevelKey);
+
+        Button* unpause_btn = new Button(Vec2(app.size.x / 2 - 300, 400), Vec2(600, 75));
+        unpause_btn -> addReleasingHandler(*this, &AppController::unpause);
+        app.pause_menu.getRoot().pushFrontSubWidget(unpause_btn);
+        Button* exit_btn = new Button(Vec2(app.size.x / 2 - 300, 500), Vec2(600, 75));
+        exit_btn -> addReleasingHandler(*this, &AppController::exit);
+        app.pause_menu.getRoot().pushFrontSubWidget(exit_btn);
+
     }
 
-
-void PauseController::onLevelKey(KeyboardContext context) {
-    if (context.key == Key::Tab) pause();
+void AppController::onLevelKey(KeyboardContext context) {
+    if (context.key == Key::Escape) pause();
 }
 
-void PauseController::onPauseKey(KeyboardContext context) {
-    if (context.key == Key::Space) unpause();
+void AppController::pause() {
+    app.lvl.getEventManager().disable();
+    app.pause_menu.getEventMan().enable();
+    app.level_active = false;
 }
 
-void PauseController::pause() {
-    level_ev_man.disable();
-    pause_ev_man.enable();
-    level_active = false;
+void AppController::unpause() {
+    app.pause_menu.getEventMan().disable();
+    app.lvl.getEventManager().enable();
+    app.level_active = true;
 }
 
-void PauseController::unpause() {
-    pause_ev_man.disable();
-    level_ev_man.enable();
-    level_active = true;
+void AppController::exit() {
+    app.sfwindow.close();
 }
 
 
 
 App::App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWindow& sfwindow_):
+    size(w, h),
     event_man(event_man_),
     pause_menu(event_man_, w, h),
     lvl(event_man_),
-    pause_ctrl(lvl.getEventManager(), pause_menu.getEventMan(), level_active),
     physics(),
     sprite_man(),
     graphics(w, h, sprite_man),
@@ -47,7 +51,6 @@ App::App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWin
         sprite_man.loadTexture(GUI_BG_TEXTURE_ID, "textures/background4.png");
         event_man.CreateClockHandler(*this, &App::onClock);
         lvl.getEventManager().disable();
-        pause_menu.getRoot().pushFrontSubWidget(new Button(Vec2(w / 2 - 300, 400), Vec2(600, 75)));
     }
 
 void App::onClock(double dt) {
