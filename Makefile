@@ -19,6 +19,9 @@ ground1: obj/ground1.o obj/load.o obj/vec2.o obj/geometry.o
 bee: obj/bee.o obj/load.o obj/vec2.o obj/geometry.o
 	gcc -shared -o plugins/bee.so obj/load.o obj/vec2.o obj/geometry.o obj/bee.o $(LDFLAGS)
 
+plat: obj/platform.o obj/load.o obj/vec2.o obj/geometry.o
+	gcc -shared -o plugins/platform.so obj/load.o obj/vec2.o obj/geometry.o obj/platform.o $(LDFLAGS)
+
 $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
