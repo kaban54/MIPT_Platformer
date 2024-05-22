@@ -11,7 +11,9 @@ const double ROT_VEL = 2;
 class Bee : public Flying, public Plugin {
     public:
     explicit Bee():
-        Flying(SpriteInfo(0, Vec2(3, 1), Vec2(18, 13)), Vec2(0, 0), Vec2(0, 0), Vec2(0, 0), 0, 0)
+        Flying(SpriteInfo(0, Vec2(0, 0), Vec2(18, 13)), Vec2(0, 0), Vec2(0, 0), Vec2(0, 0), 0, 0),
+        clock(0),
+        frame_x(rand() % 4)
         {}
     
     virtual void init() override {
@@ -23,6 +25,11 @@ class Bee : public Flying, public Plugin {
     }
 
     void onClock(double dt) {
+        clock += dt;
+        if (clock >= 0.05) {
+            clock -= 0.05;
+            frame_x = (frame_x + 1) % 4;
+        }
         if (Intersect(lvl_api -> getPlayer().getRect(), getRect())) {
             lvl_api -> getPlayer().die();
         }
@@ -36,7 +43,15 @@ class Bee : public Flying, public Plugin {
         }
         else newvel.Rotate(-ROT_VEL * dt);
         setVelocity(newvel);
+        uint8_t frame_y = 0;
+        if (newvel.x < 0) frame_y = 1;
+
+        setFrame(Vec2(frame_x, frame_y));
     }
+
+    private:
+    double clock;
+    uint8_t frame_x;
 };
 
 Drawable* createObj() {
