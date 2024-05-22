@@ -6,7 +6,7 @@
 #include "event.hpp"
 #include "graphics.hpp"
 #include "object_man.hpp"
-// #include "physics.hpp"
+#include "physics.hpp"
 
 class App {
     public:
@@ -24,7 +24,7 @@ class App {
     EventManager& event_man;
     ObjectManager obj_man;
     Level lvl;
-    // PhysicsModule physics;
+    PhysicsModule physics;
     SpriteManager sprite_man;
     GraphicsModule graphics;
     sf::RenderWindow& sfwindow;

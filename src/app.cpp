@@ -3,7 +3,7 @@
 App::App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWindow& sfwindow_):
     event_man(event_man_),
     lvl(event_man_),
-    // physics(),
+    physics(),
     sprite_man(),
     graphics(w, h, sprite_man),
     sfwindow(sfwindow_) {
@@ -11,7 +11,7 @@ App::App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWin
     }
 
 void App::onClock(double dt) {
-    // physics.HandlePhysics(lvl, dt);
+    physics.HandlePhysics(lvl, dt);
     graphics.drawLevel(lvl);
     graphics.sfDisplay(sfwindow);
 }

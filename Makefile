@@ -8,9 +8,10 @@ SRCDIR = src/
 all: test
 
 test: obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.o obj/load.o \
-	  obj/lvlload.o obj/object_man.o obj/player.o obj/sprite_man.o obj/vec2.o
+	  obj/lvlload.o obj/object_man.o obj/physics.o obj/player.o obj/sprite_man.o obj/vec2.o
 	$(CC) -o test obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.o obj/load.o \
-	              obj/lvlload.o obj/object_man.o obj/player.o obj/sprite_man.o obj/vec2.o $(SFMLFLAGS) $(LDFLAGS)
+	              obj/lvlload.o obj/object_man.o obj/physics.o obj/player.o obj/sprite_man.o obj/vec2.o  \
+			      $(SFMLFLAGS) $(LDFLAGS)
 
 ground1: obj/ground1.o obj/load.o obj/vec2.o obj/geometry.o
 	gcc -shared -o plugins/ground1.so obj/load.o obj/vec2.o obj/geometry.o obj/ground1.o $(LDFLAGS)

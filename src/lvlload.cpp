@@ -105,6 +105,8 @@ void Level::load(const std::string& filename, const ObjectManager& obj_man, Spri
         obj -> setTextureID(id);
         sprite_man.loadTexture(id, obj_info.texture_file_name);
         drawable.push_back(obj);
+        if      (obj -> getType() == BLOCK )   blocks.push_back(dynamic_cast<Block* >(obj));
+        else if (obj -> getType() == ENTITY) entities.push_back(dynamic_cast<Entity*>(obj));
     }
     MESSAGE("LEVEL(%s) LOADED SUCESSFULLY!", filename.c_str());
 }
@@ -159,4 +161,3 @@ Background readBackground(std::ifstream &stream, SpriteManager& sprite_man) {
     SpriteInfo spInfo(id, pos, size);
     return Background(spInfo.textureID, spInfo.spriteSize);
 }
-
