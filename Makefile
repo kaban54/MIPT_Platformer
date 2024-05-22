@@ -5,7 +5,7 @@ SFMLFLAGS += -lsfml-graphics -lsfml-window -lsfml-system
 OBJDIR = obj/
 SRCDIR = src/
 
-all: test ground1 bee plat cp
+all: test ground1 bee plat cp mvplat
 
 test: obj/main.o obj/app.o obj/camera.o obj/geometry.o obj/graphics.o obj/level.o obj/load.o \
 	  obj/lvlload.o obj/object_man.o obj/physics.o obj/player.o obj/sprite_man.o obj/vec2.o
@@ -24,6 +24,9 @@ plat: obj/platform.o obj/load.o obj/vec2.o obj/geometry.o
 
 cp: obj/checkpoint.o obj/load.o obj/vec2.o obj/geometry.o
 	gcc -shared -o plugins/checkpoint.so obj/load.o obj/vec2.o obj/geometry.o obj/checkpoint.o $(LDFLAGS)
+
+mvplat: obj/moving_platform.o obj/load.o obj/vec2.o obj/geometry.o
+	gcc -shared -o plugins/moving_platform.so obj/load.o obj/vec2.o obj/geometry.o obj/moving_platform.o $(LDFLAGS)
 
 $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
