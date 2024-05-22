@@ -1,15 +1,16 @@
 #include "../include/level.hpp"
 #include "../include/plugin.hpp"
 
-Level::Level(EventManager& event_man_):
+Level::Level(EventManager& global_event_man):
     bg(),
     cam(),
     grav_acc(Vec2(0, 900)),
     bounds(),
     drawable(),
     lvl_name(),
-    event_man(event_man_)
+    event_man()
     {
+        global_event_man.addSubManager(event_man);
         event_man.CreateClockHandler(cam, &Camera::followTarget);
     }
 

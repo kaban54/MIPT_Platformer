@@ -29,7 +29,7 @@ struct Background {
 class Level : public LevelAPI {
     public:
 
-    explicit Level(EventManager& event_man_);
+    explicit Level(EventManager& global_event_man);
 
     ~Level();
 
@@ -71,7 +71,7 @@ class Level : public LevelAPI {
     
     std::string lvl_name;
 
-    EventManager& event_man;
+    EventManager event_man;
 };
 
 

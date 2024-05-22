@@ -78,31 +78,36 @@ using TimeEvent = Event<double>;
 
 class EventManager {
     public:
-    explicit EventManager() = default;
+    explicit EventManager():
+        enabled(true) {}
+
     ~EventManager() = default;
 
+    void enable () {enabled = true; }
+    void disable() {enabled = false;}
+
     void mousePress(MouseContext context) {
-        mouse_press(context);
+        if (enabled) mouse_press(context);
     }
 
     void mouseRelease(MouseContext context) {
-        mouse_release(context);
+        if (enabled) mouse_release(context);
     }
 
     void mouseMove(MouseContext context) {
-        mouse_move(context);
+        if (enabled) mouse_move(context);
     }
 
     void keyPress(KeyboardContext context) {
-        key_press(context);
+        if (enabled) key_press(context);
     }
 
     void keyRelease(KeyboardContext context) {
-        key_release(context);
+        if (enabled) key_release(context);
     }
 
     void Clock(double dt) {
-        clock(dt);
+        if (enabled) clock(dt);
     }
 
     template<typename T>
@@ -135,8 +140,17 @@ class EventManager {
         clock.addHandler(new EventHandler<T, double>(obj, method));
     }
 
-    private:
+    void addSubManager(EventManager& other) {
+        CreateMousePressHandler  (other, &EventManager::mousePress  );
+        CreateMouseReleaseHandler(other, &EventManager::mouseRelease);
+        CreateKeyPressHandler    (other, &EventManager::keyPress    );
+        CreateKeyReleaseHandler  (other, &EventManager::keyRelease  );
+        CreateClockHandler       (other, &EventManager::Clock       );
+    }
 
+    private:
+    
+    bool enabled;
     MouseEvent mouse_press;
     MouseEvent mouse_release;
     MouseEvent mouse_move;
