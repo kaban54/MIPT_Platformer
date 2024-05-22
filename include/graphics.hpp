@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 #include "level.hpp"
+#include "gui.hpp"
 
 class GraphicsModule {
     public:
@@ -12,6 +13,10 @@ class GraphicsModule {
     explicit GraphicsModule(unsigned int w, unsigned int h, SpriteManager& sprite_man);
 
     void drawLevel(const Level& lvl);
+
+    void drawGui(const Gui& gui);
+
+    void drawWidget(const Widget& wid);
 
     void display();
 

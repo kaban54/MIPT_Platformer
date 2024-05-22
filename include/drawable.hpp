@@ -22,6 +22,7 @@ class Drawable : public ObjBase {
     public:
 
     explicit Drawable(SpriteInfo info, Vec2 pos_, Vec2 size_):
+    visible (true),
     spriteInfo (info),
     pos (pos_),
     size (size_)
@@ -41,8 +42,11 @@ class Drawable : public ObjBase {
     void setSpriteInfo(const SpriteInfo& info) {spriteInfo = info;}
     void setFrame(Vec2 frame_pos) { spriteInfo.frame = frame_pos; }
     void setTextureID(uint64_t id) { spriteInfo.textureID = id; }
+    void setVisible(bool vis) {visible = vis;}
+    bool getVisible() const {return visible;}
 
     private:
+    bool visible;
     SpriteInfo spriteInfo;
     Vec2 pos;
     Vec2 size;

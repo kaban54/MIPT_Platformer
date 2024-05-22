@@ -40,6 +40,26 @@ void GraphicsModule::drawLevel(const Level& lvl) {
     display();
 }
 
+void GraphicsModule::drawGui(const Gui& gui) {
+    const Background& bg = gui.getBg();
+    Camera cam (Vec2(screen.getSize().x, screen.getSize().y), Vec2(0, 0), Vec2(0, 0));
+    cam.pos = Vec2(0, 0);
+    screen.draw(sprite_man.getSprite(Rect(Vec2(0, 0), cam.size),
+                getBackGroundInfo(bg, cam)));
+
+    drawWidget(gui.getRoot());
+    display();
+}
+
+
+void GraphicsModule::drawWidget(const Widget& wid) {
+    if (!wid.getVisible()) return;
+    if (wid.getSpriteInfo().textureID != NO_TEXTURE_ID) {
+        screen.draw(sprite_man.getSprite(wid.getRect(), wid.getSpriteInfo()));
+    }
+    for (auto subwid : wid.getList()) drawWidget(*subwid);
+}
+
 static SpriteInfo getBackGroundInfo(const Background& bg, const Camera& cam) {
     Vec2 bg_pos  = Vec2((int(cam.pos.x) % int(bg.size.x) + int(bg.size.x)) % int(bg.size.x), 0);
     return SpriteInfo(bg.textureID, bg_pos, cam.size);

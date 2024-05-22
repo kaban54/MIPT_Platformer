@@ -9,6 +9,7 @@ enum ObjType {
     BLOCK,
     ENTITY,
     PROJECTILE,
+    WIDGET,
 };
 
 class ObjBase {

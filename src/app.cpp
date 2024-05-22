@@ -1,6 +1,7 @@
 #include "../include/app.hpp"
 
-PauseController::PauseController(EventManager& lvl, EventManager& pause):
+PauseController::PauseController(EventManager& lvl, EventManager& pause, bool& lvl_active):
+    level_active (lvl_active),
     level_ev_man (lvl),
     pause_ev_man (pause)
     {
@@ -20,32 +21,47 @@ void PauseController::onPauseKey(KeyboardContext context) {
 void PauseController::pause() {
     level_ev_man.disable();
     pause_ev_man.enable();
+    level_active = false;
 }
 
 void PauseController::unpause() {
     pause_ev_man.disable();
     level_ev_man.enable();
+    level_active = true;
 }
 
 
 
 App::App(unsigned int w, unsigned int h, EventManager& event_man_, sf::RenderWindow& sfwindow_):
     event_man(event_man_),
-    pause_ev_man(),
+    pause_menu(event_man_, w, h),
     lvl(event_man_),
-    pause_ctrl(lvl.getEventManager(), pause_ev_man),
+    pause_ctrl(lvl.getEventManager(), pause_menu.getEventMan(), level_active),
     physics(),
     sprite_man(),
     graphics(w, h, sprite_man),
-    sfwindow(sfwindow_) {
-        lvl.getEventManager().CreateClockHandler(*this, &App::handleLevel);
-        pause_ev_man.disable();
-        event_man.addSubManager(pause_ev_man);
+    sfwindow(sfwindow_),
+    active_gui(pause_menu),
+    level_active(false) {
+        sprite_man.loadTexture(BUTTON_TEXTURE_ID, "textures/button.png");
+        sprite_man.loadTexture(GUI_BG_TEXTURE_ID, "textures/background4.png");
+        event_man.CreateClockHandler(*this, &App::onClock);
+        lvl.getEventManager().disable();
     }
+
+void App::onClock(double dt) {
+    if (level_active) handleLevel(dt);
+    else              handleGui  (dt);
+}
 
 void App::handleLevel(double dt) {
     physics.HandlePhysics(lvl, dt);
     graphics.drawLevel(lvl);
+    graphics.sfDisplay(sfwindow);
+}
+
+void App::handleGui(double dt) {
+    graphics.drawGui(active_gui);
     graphics.sfDisplay(sfwindow);
 }
 

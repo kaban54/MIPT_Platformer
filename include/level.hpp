@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector> // myvector)
+#include "background.hpp"
 #include "blocks.hpp"
 #include "camera.hpp"
 #include "entity.hpp"
@@ -11,20 +12,7 @@
 #include "player.hpp"
 #include "plugin.hpp"
 #include "sprite_man.hpp"
-#include "vec2.hpp"
 
-
-struct Background {
-    uint64_t textureID;
-    Vec2 size;
-
-    explicit Background() = default;
-
-    explicit Background(const uint64_t textureID_, Vec2& size_):
-    textureID(textureID_),
-    size(size_)
-    {}
-};
 
 class Level : public LevelAPI {
     public:
