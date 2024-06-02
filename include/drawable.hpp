@@ -39,6 +39,7 @@ class Drawable : public ObjBase {
 
     SpriteInfo  getSpriteInfo() const { return spriteInfo; }
     SpriteInfo& getSpriteInfo()       { return spriteInfo; }
+    
     void setSpriteInfo(const SpriteInfo& info) {spriteInfo = info;}
     void setFrame(Vec2 frame_pos) { spriteInfo.frame = frame_pos; }
     void setTextureID(uint64_t id) { spriteInfo.textureID = id; }

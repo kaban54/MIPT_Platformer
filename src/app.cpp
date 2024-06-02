@@ -83,13 +83,14 @@ void App::loadPlugins(const std::string& filename) {
     
     while (std::getline(file, plugin_name)) {
         #ifdef WIND
-        full_name.assign("plugins/windows");
+        full_name.assign("plugins/windows/");
         #else
-        full_name.assign("plugins/linux");
+        full_name.assign("plugins/linux/");
         #endif
         
         full_name += plugin_name;
         obj_man.loadPlugin(full_name);
+        MESSAGE("plugin(%s) loaded sucessfully!", full_name.c_str());
     }
 }
 

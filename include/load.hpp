@@ -24,8 +24,7 @@ void parskip(std::ifstream &stream);
 double readNum(std::ifstream& stream);
 Vec2   readVec(std::ifstream& stream);
 Rect  readRect(std::ifstream& stream);
+
 std::string readString(std::ifstream& stream);
-
-
 
 #endif

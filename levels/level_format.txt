@@ -1,0 +1,16 @@
+JIJALVL_VER0
+
+Name: "name"
+Background: { (w, h), ((sprite_size_x, sprite_size_y), "textures/texture.png") }
+Gravity: (x, y)
+Bounds: ((x, y), (w, h))
+Camera: {(w, h), (playerFrameX, PlayerFrameY), (playerFrameW, PlayerFrameH)}
+Player: {(x, y), (sizeX, sizeY), (Vx, Vy), M }
+
+Objects: {  
+
+ObjectName: {params}
+...
+FixedBlock: {(x, y), (w, h)}
+
+}

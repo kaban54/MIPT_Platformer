@@ -23,9 +23,9 @@ int main() {
     AppController app_ctrl(app);
     
     #ifdef WIND
-    app.loadPlugins("plugins/plugin_list/windows");
+    app.loadPlugins("plugins/windows/plugin_list.txt");
     #else
-    app.loadPlugins("plugins/plugin_list/linux");
+    app.loadPlugins("plugins/linux/plugin_list");
     #endif
 
     app.loadLevel("./levels/test_level.txt");

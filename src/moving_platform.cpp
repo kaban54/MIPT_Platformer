@@ -30,6 +30,7 @@ class MovingPlatform : public Block, public Plugin {
         SpriteInfo info(0, Vec2(sz * 16, color * 16), Vec2(16 * (1 + sz), 9));
         setSpriteInfo(info);
         velocity = (p2 - p1) / period * 2;
+        MSG("MOVING_PLATFORM: PASSED, SUKA")
     }
 
     virtual void save(std::ofstream &stream) const override {}
